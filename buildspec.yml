@@ -1,0 +1,39 @@
+version: 0.2
+
+env:
+  variables:
+    AWS_REGION: "us-east-1"
+    AWS_ACCOUNT_ID: ""
+    GITHUB_REPOSITORY: "https://github.com/trilogy-group/sleep-action.git"
+    ECR_REPOSITORY: "devflows/trilogy-group/sleep-action"
+    COMMIT_ID: "1f6f9e8"
+    BRANCH: "main"
+    GITHUB_TOKEN: ""
+
+phases:
+  pre_build:
+    commands:
+      - echo Github Repository ${GITHUB_REPOSITORY}
+      - echo ECR Repository ${ECR_REPOSITORY}
+      - echo Commit ID ${COMMIT_ID}
+
+      - echo AWS_REGION ${AWS_REGION}
+      - echo AWS_ACCOUNT_ID ${AWS_ACCOUNT_ID}
+
+      - ECR_REGISTRY="$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com"
+      - echo ECR_REGISTRY ${ECR_REGISTRY}
+
+  build:
+    commands:
+      - echo Pulling Github Repository ${GITHUB_REPOSITORY}
+      - git pull https://${GITHUB_TOKEN}@github.com/trilogy-group/${GITHUB_REPOSITORY}.git
+      - git checkout ${COMMIT_ID}
+      
+      - echo Logging in to Amazon ECR...
+      - aws --region $AWS_REGION ecr get-login-password | docker login --username AWS --password-stdin ${ECR_REGISTRY}
+      - echo Successfully logged in to ECR
+      - ./build.sh
+
+  post_build:
+    commands:
+      - docker logout ${ECR_REGISTRY}
