@@ -3,8 +3,8 @@
 framework="unknown"
 
 # typescript OR typescript-eng
-does_ts_config_exists="$(test -e ${GITHUB_REPOSITORY}/tsconfig.json && echo yes || echo no)"
-if [ "${does_ts_config_exists}" = "yes" ]; then
+does_ts_config_exist="$(test -e ${GITHUB_REPOSITORY}/tsconfig.json && echo yes || echo no)"
+if [ "${does_ts_config_exist}" = "yes" ]; then
     framework="typescript"
     is_eng_framework="$(test -e ${GITHUB_REPOSITORY}/devflows-app && echo yes || echo no)"
     if [ "${is_eng_framework}" = "yes" ]; then
