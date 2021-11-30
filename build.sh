@@ -11,7 +11,7 @@ fi
 echo Creating ECR Repository ${ECR_REPOSITORY}
 aws --region ${AWS_REGION} ecr create-repository --repository-name ${ECR_REPOSITORY} 2>/dev/null || echo Repository already exists!!
 
-export IMAGE_TAG="${BRANCH}-${COMMIT_ID}-arm64"
+export IMAGE_TAG="${IMAGE_TAG}-arm64"
 
 echo "Starting ARM build for repo: ${GITHUB_REPOSITORY}, framework: ${FRAMEWORK}"
 cp ${FRAMEWORK}/build.sh ${GITHUB_REPOSITORY}/build.sh
