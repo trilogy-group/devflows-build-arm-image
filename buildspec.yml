@@ -4,7 +4,9 @@ env:
   variables:
     AWS_REGION: "us-east-1"
     AWS_ACCOUNT_ID: ""
-    GITHUB_REPOSITORY: "https://github.com/trilogy-group/sleep-action.git"
+    GITHUB_REPOSITORY: "sleep-action"
+    GITHUB_REPOSITORY_OWNER: "trilogy-group"
+    RUNTIME_GITOPS_REPOSITORY: "runtime-gitops"
     ECR_REPOSITORY: "devflows/trilogy-group/sleep-action"
     IMAGE_TAG: "main-1f6f9e8"
     GITHUB_TOKEN: ""
@@ -28,9 +30,13 @@ phases:
   build:
     commands:
       - echo Pulling Github Repository ${GITHUB_REPOSITORY}
-      - git pull https://${GITHUB_TOKEN}@github.com/trilogy-group/${GITHUB_REPOSITORY}.git
-      - git checkout ${COMMIT_ID}
+      - git pull https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY_OWNER}/${GITHUB_REPOSITORY}.git
+      - echo Checking out commit ID ${COMMIT_ID}
+      - cd ${GITHUB_REPOSITORY} && git fetch --all && git checkout ${COMMIT_ID} && cd ..
       
+      - echo Pulling Runtime Gitops Repository
+      - git pull https://${GITHUB_TOKEN}@github.com/trilogy-group/${RUNTIME_GITOPS_REPOSITORY}.git
+
       - echo Logging in to Amazon ECR...
       - aws --region $AWS_REGION ecr get-login-password | docker login --username AWS --password-stdin ${ECR_REGISTRY}
       - echo Successfully logged in to ECR
