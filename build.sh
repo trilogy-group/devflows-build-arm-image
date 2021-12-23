@@ -1,6 +1,6 @@
 #!/bin/bash
 
-FRAMEWORK="$(./framework-resolver.sh)"
+FRAMEWORK="$(bash framework-resolver.sh)"
 echo Framework ${FRAMEWORK}
 
 if [ "${FRAMEWORK}" = "unknown" ]; then
