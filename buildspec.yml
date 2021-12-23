@@ -30,12 +30,12 @@ phases:
   build:
     commands:
       - echo Pulling Github Repository ${GITHUB_REPOSITORY}
-      - git pull https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY_OWNER}/${GITHUB_REPOSITORY}.git
+      - git clone https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY_OWNER}/${GITHUB_REPOSITORY}.git
       - echo Checking out commit ID ${COMMIT_ID}
       - cd ${GITHUB_REPOSITORY} && git fetch --all && git checkout ${COMMIT_ID} && cd ..
       
       - echo Pulling Runtime Gitops Repository
-      - git pull https://${GITHUB_TOKEN}@github.com/trilogy-group/${RUNTIME_GITOPS_REPOSITORY}.git
+      - git clone https://${GITHUB_TOKEN}@github.com/trilogy-group/${RUNTIME_GITOPS_REPOSITORY}.git
 
       - echo Logging in to Amazon ECR...
       - aws --region $AWS_REGION ecr get-login-password | docker login --username AWS --password-stdin ${ECR_REGISTRY}
