@@ -16,4 +16,4 @@ export IMAGE_TAG="${IMAGE_TAG}-arm64"
 echo "Starting ARM build for repo: ${GITHUB_REPOSITORY}, framework: ${FRAMEWORK}"
 cp ${FRAMEWORK}/build.sh ${GITHUB_REPOSITORY}/build.sh
 cd ${GITHUB_REPOSITORY}
-./build.sh
+bash build.sh
