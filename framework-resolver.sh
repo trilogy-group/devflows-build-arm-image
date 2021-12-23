@@ -7,7 +7,7 @@ does_ts_config_exist="$(test -e ${GITHUB_REPOSITORY}/tsconfig.json && echo yes |
 if [ "${does_ts_config_exist}" = "yes" ]; then
     framework="typescript"
 
-    is_eng_framework="$(test -e ${GITHUB_REPOSITORY}/.devflows && echo yes || echo no)"
+    is_eng_framework="$(test -e ${GITHUB_REPOSITORY}/.devflows && test -e ${GITHUB_REPOSITORY}/devflows-app && echo yes || echo no)"
     if [ "${is_eng_framework}" = "yes" ]; then
         framework="typescript-eng"
     fi
@@ -29,7 +29,7 @@ if [ "${is_python_framework}" = "yes" ]; then
 fi
 
 # Java
-is_java_framework="$(test -e ${GITHUB_REPOSITORY}/pom.xml && echo yes || echo no)"
+is_java_framework="$(test -e ${GITHUB_REPOSITORY}/pom.xml || test -e ${GITHUB_REPOSITORY}/gradlew && echo yes || echo no)"
 if [ "${is_java_framework}" = "yes" ]; then
     echo "java"
     exit 0
