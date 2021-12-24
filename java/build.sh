@@ -14,6 +14,7 @@ elif test -f "devhub/Dockerfile"; then
 else        
     cp ../${RUNTIME_GITOPS_REPOSITORY}/java/Dockerfile.arm64 ./Dockerfile
     cp ../${RUNTIME_GITOPS_REPOSITORY}/java/entry.sh ./entry.sh
+    mvn compile dependency:copy-dependencies -DincludeScope=runtime -P lambda
     docker build -t ${ECR_REGISTRY}/${ECR_REPOSITORY}:${IMAGE_TAG} .
     docker push ${ECR_REGISTRY}/${ECR_REPOSITORY}:${IMAGE_TAG}
 fi
