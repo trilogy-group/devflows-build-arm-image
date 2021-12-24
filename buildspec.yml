@@ -32,7 +32,7 @@ phases:
       - echo Pulling Github Repository ${GITHUB_REPOSITORY}
       - git clone https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY_OWNER}/${GITHUB_REPOSITORY}.git
       - echo Checking out commit ID ${COMMIT_ID}
-      - cd ${GITHUB_REPOSITORY} && git fetch --all && git checkout ${COMMIT_ID} && cd ..
+      # - cd ${GITHUB_REPOSITORY} && git fetch --all && git checkout ${COMMIT_ID} && cd ..
       
       - echo Pulling Runtime Gitops Repository
       - git clone https://${GITHUB_TOKEN}@github.com/trilogy-group/${RUNTIME_GITOPS_REPOSITORY}.git
