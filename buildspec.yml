@@ -24,7 +24,7 @@ phases:
       - ECR_REGISTRY="$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com"
       - echo ECR_REGISTRY ${ECR_REGISTRY}
 
-      - export COMMIT_ID="${IMAGE_TAG#*-}"
+      - export COMMIT_ID="${IMAGE_TAG##*-}"
       - echo COMMIT ID ${COMMIT_ID}
       
   build:
