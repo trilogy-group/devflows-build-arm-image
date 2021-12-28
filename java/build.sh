@@ -5,9 +5,8 @@ if test -f "gradlew"; then
     ./gradlew clean assemble
     mkdir -p ./lambda/build/extensions
     cp ../logs-extension-arm64 ./lambda/build/extensions/logs-extension
-    ls ./lambda/build/extensions
-    # docker build -t ${ECR_REGISTRY}/${ECR_REPOSITORY}:${IMAGE_TAG} -f lambda/src/main/docker/Dockerfile.lambda.arm64 lambda
-    # docker push ${ECR_REGISTRY}/${ECR_REPOSITORY}:${IMAGE_TAG}
+    docker build -t ${ECR_REGISTRY}/${ECR_REPOSITORY}:${IMAGE_TAG} -f lambda/src/main/docker/Dockerfile.lambda.arm64 lambda
+    docker push ${ECR_REGISTRY}/${ECR_REPOSITORY}:${IMAGE_TAG}
 elif test -f "devhub/Dockerfile"; then
     docker build -t ${ECR_REGISTRY}/${ECR_REPOSITORY}:${IMAGE_TAG} -f devhub/Dockerfile .
     docker push ${ECR_REGISTRY}/${ECR_REPOSITORY}:${IMAGE_TAG}
