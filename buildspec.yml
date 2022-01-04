@@ -10,7 +10,8 @@ env:
     ECR_REPOSITORY: "devflows/trilogy-group/sleep-action"
     IMAGE_TAG: "main-1f6f9e8"
     GITHUB_TOKEN: ""
-
+    IMPLEMENTATION_TYPE: "FUNCTION | DOCKER"
+    
 phases:
   pre_build:
     commands:
