@@ -3,7 +3,7 @@
 framework="unknown"
 
 # typescript OR typescript-eng
-does_ts_config_exist="$(test -e ${GITHUB_REPOSITORY}/tsconfig.json && echo yes || echo no)"
+does_ts_config_exist="$(test -e ${GITHUB_REPOSITORY}/package.json && echo yes || echo no)"
 if [ "${does_ts_config_exist}" = "yes" ]; then
     framework="typescript"
 
